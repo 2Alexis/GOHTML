@@ -19,17 +19,7 @@ body {
     padding: 20px;
 }
 
-::selection {
-    background-color: #A9CCE3; /* Couleur de fond de la sélection */
-    color: #333; /* Couleur du texte de la sélection */
-}
 
-/* Couleur de la sélection pour les champs de formulaire */
-input::selection,
-select::selection {
-    background-color: whitesmoke;
-    color: #333;
-}
 
 h1, h2 {
     color: #4c4b4f;
