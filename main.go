@@ -9,10 +9,10 @@ import (
 var userData UserData
 
 type UserData struct {
-	FirstName   string
-	LastName    string
-	DateOfBirth string
-	Sex         string
+	Nom          string
+	Prenom       string
+	Anniversaire string
+	Sexe         string
 }
 
 func main() {
@@ -20,8 +20,6 @@ func main() {
 	http.HandleFunc("/templates/init", initHandler)
 	http.HandleFunc("/templates/treatment", treatmentHandler)
 	http.HandleFunc("/templates/display", displayHandler)
-
-	fmt.Println("Server is running on :8080")
 	http.ListenAndServe(":8080", nil)
 }
 
@@ -32,12 +30,11 @@ func initHandler(w http.ResponseWriter, r *http.Request) {
 func treatmentHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 		userData = UserData{
-			FirstName:   r.FormValue("first_name"),
-			LastName:    r.FormValue("last_name"),
-			DateOfBirth: r.FormValue("date_of_birth"),
-			Sex:         r.FormValue("sex"),
+			Nom:          r.FormValue("nom"),
+			Prenom:       r.FormValue("prenom"),
+			Anniversaire: r.FormValue("birthday"),
+			Sexe:         r.FormValue("sexe"),
 		}
-
 		http.Redirect(w, r, "/templates/display", http.StatusSeeOther)
 	} else {
 		http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
@@ -45,8 +42,6 @@ func treatmentHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func displayHandler(w http.ResponseWriter, r *http.Request) {
-	// Display the user data
-
 	renderTemplate(w, "display", userData)
 }
 
